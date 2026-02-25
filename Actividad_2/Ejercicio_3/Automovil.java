@@ -1,4 +1,6 @@
 
+import java.util.Scanner;
+
 public class Automovil {
     String marca;
     int modelo;
@@ -28,6 +30,8 @@ public class Automovil {
         this.color = color;
         this.esAutomatico = esAutomatico;
     }
+
+    // ... (rest of the class remains the same until main)
 
     String getMarca() {
         return marca;
@@ -169,16 +173,83 @@ public class Automovil {
     }
 
     public static void main(String args[]) {
-        Automovil auto1 = new Automovil("Ford",2018,3,tipoCom.DIESEL,tipoA.EJECUTIVO,5,6,250,tipoColor.NEGRO, false);
-        auto1.imprimir();
-        auto1.setVelocidadActual(100);
-        System.out.println("Velocidad actual = " + auto1.velocidadActual);
-        auto1.acelerar(20);
-        System.out.println("Velocidad actual = " + auto1.velocidadActual);
-        auto1.desacelerar(50);
-        System.out.println("Velocidad actual = " + auto1.velocidadActual);
-        auto1.frenar();
-        System.out.println("Velocidad actual = " + auto1.velocidadActual);
-        auto1.desacelerar(20);
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Ingrese los datos del automóvil:");
+        System.out.print("Marca: ");
+        String marca = scanner.nextLine();
+        System.out.print("Modelo (año): ");
+        int modelo = scanner.nextInt();
+        System.out.print("Motor (litros): ");
+        int motor = scanner.nextInt();
+        System.out.print("Tipo de combustible (GASOLINA, BIOETANOL, DIESEL, BIODISESEL, GAS_NATURAL): ");
+        tipoCom combustible = tipoCom.valueOf(scanner.next().toUpperCase());
+        System.out.print("Tipo de automóvil (CIUDAD, SUBCOMPACTO, COMPACTO, FAMILIAR, EJECUTIVO, SUV): ");
+        tipoA tipo = tipoA.valueOf(scanner.next().toUpperCase());
+        System.out.print("Número de puertas: ");
+        int puertas = scanner.nextInt();
+        System.out.print("Cantidad de asientos: ");
+        int asientos = scanner.nextInt();
+        System.out.print("Velocidad máxima (km/h): ");
+        int maxVel = scanner.nextInt();
+        System.out.print("Color (BLANCO, NEGRO, ROJO, NARANJA, AMARILLO, VERDE, AZUL, VIOLETA): ");
+        tipoColor color = tipoColor.valueOf(scanner.next().toUpperCase());
+        System.out.print("¿Es automático? (true/false): ");
+        boolean esAuto = scanner.nextBoolean();
+
+        Automovil auto1 = new Automovil(marca, modelo, motor, combustible, tipo, puertas, asientos, maxVel, color, esAuto);
+
+        System.out.println("\n--- Automóvil creado exitosamente ---");
+        auto1.setVelocidadActual(100); // Valor inicial según enunciado original
+        System.out.println("Velocidad inicial establecida en 100 km/h");
+        
+        menu(auto1, scanner);
+        scanner.close();
+    }
+
+    // Método recursivo para el menú
+    public static void menu(Automovil auto, Scanner scanner) {
+        System.out.println("\n--- Menú de Operaciones ---");
+        System.out.println("1. Acelerar");
+        System.out.println("2. Desacelerar");
+        System.out.println("3. Frenar");
+        System.out.println("4. Ver estado");
+        System.out.println("5. Salir");
+        System.out.print("Seleccione una opción: ");
+        
+        int opcion = scanner.nextInt();
+        
+        switch (opcion) {
+            case 1:
+                System.out.print("Ingrese velocidad a aumentar: ");
+                int aumento = scanner.nextInt();
+                auto.acelerar(aumento);
+                System.out.println("Velocidad actual: " + auto.velocidadActual);
+                menu(auto, scanner); // Llamada recursiva
+                break;
+            case 2:
+                System.out.print("Ingrese velocidad a disminuir: ");
+                int disminucion = scanner.nextInt();
+                auto.desacelerar(disminucion);
+                System.out.println("Velocidad actual: " + auto.velocidadActual);
+                menu(auto, scanner); // Llamada recursiva
+                break;
+            case 3:
+                auto.frenar();
+                System.out.println("Automóvil frenado. Velocidad actual: " + auto.velocidadActual);
+                menu(auto, scanner); // Llamada recursiva
+                break;
+            case 4:
+                auto.imprimir();
+                menu(auto, scanner); // Llamada recursiva
+                break;
+            case 5:
+                System.out.println("Saliendo del programa...");
+                break; // Caso base: no se llama a menu(), termina la recursión
+            default:
+                System.out.println("Opción no válida.");
+                menu(auto, scanner); // Llamada recursiva
+                break;
+        }
     }
 }

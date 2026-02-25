@@ -1,4 +1,6 @@
 
+import java.util.Scanner;
+
 public class Persona {
     String nombre; 
     String apellidos; 
@@ -27,9 +29,51 @@ public class Persona {
     }
 
     public static void main(String args[]) {
-        Persona p1 = new Persona("Pedro","Pérez","1053121010",1998, "Colombia", 'H');
-        Persona p2 = new Persona("Luis","León","1053223344",2001, "Argentina", 'M');
+        Scanner scanner = new Scanner(System.in);
+        
+        String nombre, apellidos, numeroDocumentoIdentidad, paisNacimiento;
+        int anioNacimiento;
+        char genero;
+
+        System.out.println("Ingrese los datos de la primera persona:");
+        System.out.print("Nombre: ");
+        nombre = scanner.nextLine();
+        System.out.print("Apellidos: ");
+        apellidos = scanner.nextLine();
+        System.out.print("Número de documento de identidad: ");
+        numeroDocumentoIdentidad = scanner.nextLine();
+        System.out.print("Año de nacimiento: ");
+        anioNacimiento = scanner.nextInt();
+        scanner.nextLine(); // Consumir salto de línea
+        System.out.print("País de nacimiento: ");
+        paisNacimiento = scanner.nextLine();
+        System.out.print("Género (H/M): ");
+        genero = scanner.next().charAt(0);
+        scanner.nextLine(); // Consumir salto de línea
+
+        Persona p1 = new Persona(nombre, apellidos, numeroDocumentoIdentidad, anioNacimiento, paisNacimiento, genero);
+
+        System.out.println("\nIngrese los datos de la segunda persona:");
+        System.out.print("Nombre: ");
+        nombre = scanner.nextLine();
+        System.out.print("Apellidos: ");
+        apellidos = scanner.nextLine();
+        System.out.print("Número de documento de identidad: ");
+        numeroDocumentoIdentidad = scanner.nextLine();
+        System.out.print("Año de nacimiento: ");
+        anioNacimiento = scanner.nextInt();
+        scanner.nextLine(); // Consumir salto de línea
+        System.out.print("País de nacimiento: ");
+        paisNacimiento = scanner.nextLine();
+        System.out.print("Género (H/M): ");
+        genero = scanner.next().charAt(0);
+
+        Persona p2 = new Persona(nombre, apellidos, numeroDocumentoIdentidad, anioNacimiento, paisNacimiento, genero);
+
+        System.out.println("\nImprimiendo datos de las personas...");
         p1.imprimir();
         p2.imprimir();
+
+        scanner.close();
     }
 }
