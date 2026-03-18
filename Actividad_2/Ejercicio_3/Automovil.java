@@ -1,4 +1,3 @@
-
 import java.util.Scanner;
 
 public class Automovil {
@@ -30,8 +29,6 @@ public class Automovil {
         this.color = color;
         this.esAutomatico = esAutomatico;
     }
-
-    // ... (rest of the class remains the same until main)
 
     String getMarca() {
         return marca;
