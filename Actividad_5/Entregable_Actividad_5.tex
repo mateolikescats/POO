@@ -1,0 +1,363 @@
+% Homework Assignment Article
+% LaTeX Template
+% Version 1.3.1 (ECL) (08/08/17)
+%
+% This template has been downloaded from:
+% Overleaf
+%
+% Original author:
+% Victor Zimmermann (zimmermann@cl.uni-heidelberg.de)
+%
+% License:
+% CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+
+\documentclass[a4paper]{article} % Uses article class in A4 format
+
+%----------------------------------------------------------------------------------------
+%	FORMATTING
+%----------------------------------------------------------------------------------------
+
+\addtolength{\hoffset}{-2.25cm}
+\addtolength{\textwidth}{4.5cm}
+\addtolength{\voffset}{-3.25cm}
+\addtolength{\textheight}{5cm}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{0in}
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\usepackage[utf8]{inputenc} % Use UTF-8 encoding
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english, spanish]{babel} % Language hyphenation and typographical rules
+
+\usepackage{blindtext} % Package to generate dummy text
+\usepackage{charter} % Use the Charter font
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage{amsthm, amsmath, amssymb} % Mathematical typesetting
+\usepackage{float} % Improved interface for floating objects
+\usepackage[final, colorlinks = true, 
+            linkcolor = black, 
+            citecolor = black]{hyperref} % For hyperlinks in the PDF
+\usepackage{graphicx, multicol} % Enhanced support for graphics
+\usepackage{xcolor} % Driver-independent color extensions
+\usepackage{colortbl} % Para colores en tablas (Requerido por UML)
+\usepackage{array} % Requerido por UML
+\usepackage{marvosym, wasysym} % More symbols
+\usepackage{rotating} % Rotation tools
+\usepackage{censor} % Facilities for controlling restricted text
+\usepackage{listings} % Environment for non-formatted code
+\usepackage{pseudocode} % Environment for specifying algorithms in a natural way
+\usepackage{booktabs} % Enhances quality of tables
+
+% Configuración de listings
+\lstset{
+    language=Java,         
+    basicstyle=\ttfamily\small,    
+    keywordstyle=\color{blue!70!black}\bfseries,
+    commentstyle=\color{green!50!black}\itshape,
+    numbers=left,            
+    frame=lines             
+}
+
+% Configuración TikZ y Árboles
+\usepackage{tikz}
+\usepackage{tikz-qtree} % Easy tree drawing tool
+\usetikzlibrary{arrows.meta,positioning,fit,backgrounds,calc,shadows} % Librerías para UML
+\tikzset{every tree node/.style={align=center,anchor=north},
+         level distance=2cm} % Configuration for q-trees
+
+\usepackage[backend=biber,style=numeric,
+            sorting=nyt]{biblatex} % Complete reimplementation of bibliographic facilities
+\usepackage{csquotes} % Context sensitive quotation facilities
+
+\usepackage[yyyymmdd]{datetime} % Uses YEAR-MONTH-DAY format for dates
+\renewcommand{\dateseparator}{-} % Sets dateseparator to '-'
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{}\renewcommand{\headrulewidth}{0pt} % Blank out the default header
+\fancyfoot[L]{} % Custom footer text
+\fancyfoot[C]{} % Custom footer text
+\fancyfoot[R]{\thepage} % Custom footer text
+
+\newcommand{\note}[1]{\marginpar{\scriptsize \textcolor{red}{#1}}} % Enables comments in red on margin
+
+%----------------------------------------------------------------------------------------
+%	UML DIAGRAM CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+% --- Color palette ---
+\definecolor{umlHeader}{RGB}{215,232,252}
+\definecolor{umlHeader2}{RGB}{226,239,218}
+\definecolor{umlBorder}{RGB}{54,84,134}
+\definecolor{namespaceFill}{RGB}{248,250,253}
+\definecolor{assocColor}{RGB}{70,70,70}
+\definecolor{inheritColor}{RGB}{45,78,120}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% UML class macro: #1 node name, #2 position, #3 width, #4 header color, #5 class name, #6 attributes, #7 methods
+\newcommand{\umlclass}[7]{%
+  \node[inner sep=0pt, outer sep=0pt, drop shadow={opacity=0.25, shadow xshift=2pt, shadow yshift=-2pt}] (#1) at #2 {%
+    \scriptsize\sffamily
+    \renewcommand{\arraystretch}{1.10}%
+    \setlength{\tabcolsep}{4pt}%
+    \begin{tabular}{|L{#3}|}
+      \hline
+      \rowcolor{#4}\multicolumn{1}{|c|}{\bfseries #5}\\
+      \hline
+      #6\\
+      \hline
+      #7\\
+      \hline
+    \end{tabular}%
+  };%
+}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\fancyhead[C]{}
+\hrule \medskip % Upper rule
+\begin{minipage}{0.295\textwidth} % Left side of title section
+\raggedright
+UNAL\\ % Your lecture or course
+\footnotesize % Authors text size
+\hfill\\
+Cristian Ruiz Hernandez\\
+Mateo Quiceno Zapata
+\end{minipage}
+\begin{minipage}{0.4\textwidth} % Center of title section
+\centering 
+\large % Title text size
+Actividad 5\\ % Assignment title and number
+\normalsize % Subtitle text size
+Programación Orientada a Objetos (3007744)\\ % Assignment subtitle
+\end{minipage}
+\begin{minipage}{0.295\textwidth} % Right side of title section
+\raggedleft
+\today\\ % Date
+\footnotesize % Email text size
+\hfill\\
+cruizh@unal.edu.co\\
+mquicenoz@unal.edu.co
+\end{minipage}
+\medskip\hrule % Lower rule
+\bigskip
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section{Biblioteca CRUD (Persistencia en Archivos)}
+Desarrollo de una Aplicación con Interfaz Gráfica (GUI) conectada a un archivo de datos local. El sistema debe contener un formulario provisto de botones funcionales para ejecutar de manera exitosa el patrón de persistencia \textbf{CRUD} (Create, Read, Update y Delete) sobre un archivo de texto secuencial usando Java. Las operaciones de persistencia deben interactuar con el sistema de archivos del sistema operativo a través del uso de la clase \texttt{RandomAccessFile}, gestionando la integridad, evitando duplicados, y permitiendo la actualización y eliminación física de los registros.
+
+\bigskip
+
+\subsection{Interfaz de usuario}
+A continuación se detallan los componentes y estados de la interfaz gráfica desarrollada para la gestión y administración de la biblioteca personal:
+
+\begin{enumerate}
+    \item \textbf{Ventana de Inicio (Limpia):} Estado inicial de la aplicación mostrando un formulario vacío y una lista sin elementos en la tabla, indicando una base de datos limpia.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{imagenes/1.png}
+        \caption{Interfaz inicial limpia para la administración de libros.}
+    \end{figure}
+
+    \item \textbf{Diligenciamiento de Datos:} El usuario completa la información (Título, Autor, Estado) en el formulario de la interfaz antes de presionar el botón de creación.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{imagenes/2.png}
+        \caption{Datos cargados en el formulario de registro.}
+    \end{figure}
+
+    \item \textbf{Confirmación de Creación Exitosa:} Tras hacer clic en ``Añadir (Create)'', se escribe en el archivo físico y se despliega una alerta de confirmación.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{imagenes/3.png}
+        \caption{Diálogo emergente informando el guardado exitoso del nuevo registro.}
+    \end{figure}
+
+    \item \textbf{Tabla con Registro Visualizado (Read):} Al cerrarse el diálogo, la tabla actualiza su listado realizando una lectura completa del archivo secuencial.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{imagenes/4.png}
+        \caption{Tabla que refleja el registro recién creado en el archivo \texttt{biblioteca.txt}.}
+    \end{figure}
+
+    \item \textbf{Selección y Carga en Formulario:} Al seleccionar una fila de la tabla, los campos del formulario se rellenan automáticamente permitiendo al usuario realizar modificaciones sobre el objeto.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{imagenes/5.png}
+        \caption{Fila seleccionada, transfiriendo la información correspondiente a los inputs de texto.}
+    \end{figure}
+
+    \item \textbf{Mensaje de Edición Exitosa (Update):} Tras presionar ``Guardar Edición (Update)'', el sistema sobreescribe el archivo mediante un archivo temporal y reestablece los campos.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{imagenes/6.png}
+        \caption{Diálogo informativo de confirmación del proceso de edición física del registro.}
+    \end{figure}
+
+    \item \textbf{Control de Campos Nulos o Vacíos:} El sistema valida que los campos de Título y Autor contengan texto válido. Si están vacíos, detiene la operación y alerta al usuario.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{imagenes/7.png}
+        \caption{Mensaje restrictivo impidiendo el registro de datos incompletos.}
+    \end{figure}
+
+    \item \textbf{Evitar Duplicidad de Registros:} Al intentar crear un libro cuyo título ya existe en el archivo, se levanta una alerta impidiendo el guardado repetido.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{imagenes/8.png}
+        \caption{Excepción controlada por pantalla previniendo redundancia en la persistencia.}
+    \end{figure}
+
+    \item \textbf{Confirmación de Eliminación (Delete):} Al presionar ``Eliminar (Delete)'', se solicita confirmación de exclusión al usuario antes de borrar físicamente el registro en el archivo.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{imagenes/9.png}
+        \caption{Diálogo de confirmación del tipo Yes/No para proteger la consistencia de los datos.}
+    \end{figure}
+\end{enumerate}
+
+\subsection{Diagrama de clases}
+
+\begin{center}
+\resizebox{0.85\textwidth}{!}{%
+\begin{tikzpicture}[
+  font=\sffamily,
+  inheritance/.style={draw=inheritColor, line width=0.8pt, -{Triangle[open, length=6pt, width=8pt]}},
+  association/.style={draw=assocColor, line width=0.65pt, -{Latex[length=4pt, width=5pt]}},
+  plainassoc/.style={draw=assocColor, line width=0.65pt},
+  label/.style={font=\scriptsize\sffamily, fill=white, inner sep=1.5pt},
+  multiplicity/.style={font=\scriptsize\sffamily, fill=white, inner sep=1pt}
+]
+
+% -----------------------------------------------------------------------------
+% Classes in namespace Actividad5
+% -----------------------------------------------------------------------------
+
+\umlclass{VentanaBiblioteca}{(0,0)}{5.5cm}{umlHeader}{VentanaBiblioteca}{%
+-txtTitulo: JTextField\\
+-txtAutor: JTextField\\
+-cbEstado: JComboBox\\
+-tablaLibros: JTable\\
+-modeloTabla: DefaultTableModel\\
+-tituloSeleccionado: String}{%
++VentanaBiblioteca()\\
+-limpiarFormulario(): void\\
+-cargarTabla(): void\\
+-crear(): void\\
+-actualizar(): void\\
+-borrar(): void\\
++main(String[] args)\$}
+
+\umlclass{GestorArchivoBiblioteca}{(7.5,0)}{5.2cm}{umlHeader}{GestorArchivoBiblioteca}{%
+-FILE\_NAME: String = ``biblioteca.txt''}{%
++leerLibros(): ArrayList\$\\
++crearLibro(String, String, String)\$\\
++actualizarLibro(String, String, String, String)\$\\
++borrarLibro(String)\$}
+
+\umlclass{UIUtils}{(0,-6.5)}{5.0cm}{umlHeader}{UIUtils}{%
++COLOR\_FONDO: Color\$\\
++COLOR\_PRIMARIO: Color\$\\
++COLOR\_TEXTO: Color\$\\
++FUENTE\_TITULO: Font\$\\
++FUENTE\_NORMAL: Font\$}{%
++aplicarTema()\$\\
++estilizarBoton(JButton)\$\\
++estilizarPanel(JPanel)\$}
+
+% -----------------------------------------------------------------------------
+% Namespace boundary Actividad5
+% -----------------------------------------------------------------------------
+\begin{scope}[on background layer]
+  \node[
+    draw=umlBorder,
+    rounded corners=8pt,
+    very thick,
+    fill=namespaceFill,
+    inner xsep=14pt,
+    inner ysep=26pt,
+    fit=(VentanaBiblioteca) (GestorArchivoBiblioteca) (UIUtils)
+  ] (namespace) {};
+  \node[
+    anchor=north west,
+    fill=umlBorder,
+    text=white,
+    rounded corners=3pt,
+    font=\bfseries\sffamily\small,
+    inner xsep=8pt,
+    inner ysep=4pt
+  ] at ([xshift=10pt,yshift=-8pt]namespace.north west) {namespace Actividad5};
+\end{scope}
+
+% -----------------------------------------------------------------------------
+% Associations Actividad5
+% -----------------------------------------------------------------------------
+\draw[association] (VentanaBiblioteca.east) -- (GestorArchivoBiblioteca.west)
+  node[label, midway, above] {Usa}
+  node[multiplicity, near start, above] {1}
+  node[multiplicity, near end, above] {1};
+
+\draw[association] (VentanaBiblioteca.south) -- (UIUtils.north)
+  node[label, midway, right] {Aplica Estilo}
+  node[multiplicity, near start, left] {1}
+  node[multiplicity, near end, left] {1};
+
+\end{tikzpicture}%
+}
+\end{center}
+
+\subsection{Casos de uso}
+\begin{itemize}
+    \item \textbf{Caso de Uso 1: Crear Registro de Libro}
+    \begin{itemize}
+        \item \textbf{Actor:} Usuario / Bibliotecario.
+        \item \textbf{Precondición:} La ventana principal de la aplicación debe estar desplegada.
+        \item \textbf{Flujo Principal:} El usuario escribe el Título, el Autor y selecciona el Estado. Presiona el botón \textit{Añadir (Create)}. El sistema valida que los campos no estén vacíos y que el título no sea redundante, escribe el registro en el archivo de texto y refresca la tabla visual.
+        \item \textbf{Flujo Alternativo (Campos Vacíos):} Si algún campo obligatorio está vacío, el sistema interrumpe la lógica y notifica mediante una alerta emergente de tipo advertencia.
+        \item \textbf{Flujo Alternativo (Duplicidad):} Si el título ya existe en el archivo, se arroja una alerta de error y se bloquea la escritura.
+    \end{itemize}
+    
+    \item \textbf{Caso de Uso 2: Leer Libros Almacenados}
+    \begin{itemize}
+        \item \textbf{Actor:} Sistema / Usuario.
+        \item \textbf{Precondición:} El archivo \texttt{biblioteca.txt} debe existir o crearse en el primer acceso.
+        \item \textbf{Flujo Principal:} Al inicializar la interfaz o tras cualquier cambio, el sistema ejecuta la lectura del archivo plano línea por línea. Decodifica el formato delimitado por el caracter especial \texttt{!} en variables y las renderiza ordenadamente dentro del modelo de datos de la \texttt{JTable}.
+    \end{itemize}
+
+    \item \textbf{Caso de Uso 3: Actualizar Estado del Libro}
+    \begin{itemize}
+        \item \textbf{Actor:} Usuario.
+        \item \textbf{Precondición:} Un registro debe seleccionarse de la tabla cargada.
+        \item \textbf{Flujo Principal:} El usuario selecciona un libro de la lista, modifica su estado o información en el formulario y pulsa \textit{Guardar Edición (Update)}. El sistema lee secuencialmente el archivo copiando las líneas en un archivo temporal; cuando detecta el título coincidente, inyecta la nueva línea modificada. Reemplaza el archivo temporal por el original y actualiza la vista.
+    \end{itemize}
+
+    \item \textbf{Caso de Uso 4: Eliminar Libro}
+    \begin{itemize}
+        \item \textbf{Actor:} Usuario.
+        \item \textbf{Precondición:} Un registro debe estar previamente seleccionado.
+        \item \textbf{Flujo Principal:} El usuario pulsa \textit{Eliminar (Delete)}. El sistema despliega un mensaje confirmando la acción (Yes/No). Si el usuario selecciona sí, el sistema realiza una copia de exclusión secuencial (omitiendo la línea del libro seleccionado) mediante un archivo temporal, sobreescribe el archivo principal, limpia el formulario y actualiza la lista.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Link}
+Para verificar funcionamiento se debe ejecutar el archivo de "VentanaBiblioteca.java"\\
+\url{https://github.com/mateolikescats/POO/tree/main/Actividad_5/src/Actividad5}
+
+\end{document}
