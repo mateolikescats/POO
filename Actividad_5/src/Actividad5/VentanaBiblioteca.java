@@ -54,7 +54,7 @@ public class VentanaBiblioteca extends JFrame {
         JButton btnBorrar = new JButton("Eliminar (Delete)");
         UIUtils.estilizarBoton(btnBorrar);
         btnBorrar.setBackground(new Color(231, 76, 60)); // Rojo para borrar
-        btnBorrar.setForeground(Color.WHITE);
+        btnBorrar.setForeground(new Color(231, 76, 60));
         btnBorrar.addActionListener(e -> borrar());
 
         JButton btnLimpiar = new JButton("Limpiar Campos");
