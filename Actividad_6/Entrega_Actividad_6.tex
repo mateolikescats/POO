@@ -146,7 +146,7 @@ mquicenoz@unal.edu.co
 \bigskip
 
 \begin{center}
-\Large\textbf{Entrega Actividad 6: Ejercicios Propuestos}
+\Large\textbf{Entrega Actividad 6: Ejercicios Resueltos y Propuestos}
 \end{center}
 \vspace{0.5cm}
 
@@ -155,12 +155,39 @@ mquicenoz@unal.edu.co
 %----------------------------------------------------------------------------------------
 
 \section{Ejercicio 2.10. Sobrecarga de métodos}
+
+\subsection{Enunciado (Ejemplo del Texto): Clase Pedido}
+El ejemplo muestra una clase \texttt{Pedido} con un método sobrecargado \texttt{calcularPedido} que recibe diferente cantidad de parámetros para calcular el total de los platos.
+
+\subsubsection{Código Fuente}
+\lstinputlisting[language=Java]{Ejercicio_2_10/Pedido.java}
+
+\subsubsection{Diagrama de clases}
+\begin{center}
+\begin{tikzpicture}[
+  font=\sffamily,
+  label/.style={font=\scriptsize\sffamily, fill=white, inner sep=1.5pt}
+]
+\umlclass{Pedido}{(0,0)}{14cm}{umlHeader}{Pedido}{%
+}{%
+  + calcularPedido(primerPlato: String, costoPrimerPlato: double, bebida: String, costoBebida: double): void\\
+  + calcularPedido(primerPlato: String, costoPrimerPlato: double, segundoPlato: String, costoSegundoPlato: double, bebida: String, costoBebida: double): void\\
+  + calcularPedido(primerPlato: String, costoPrimerPlato: double, segundoPlato: String, costoSegundoPlato: double, postre: String, costoPostre: double, bebida: String, costoBebida: double): void\\
+  + main(args: String[])\$
+}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Link}
+\url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_2_10/Pedido.java}
+
+\subsection{Ejercicio Propuesto: Clase Suma}
 Desarrollo de una clase denominada \texttt{Suma}, la cual posee múltiples métodos \texttt{sumar} con el mismo nombre pero con diferentes cantidades o tipos de parámetros (enteros y dobles).
 
-\subsection{Código Fuente}
+\subsubsection{Código Fuente}
 \lstinputlisting[language=Java]{Ejercicio_2_10/Suma.java}
 
-\subsection{Diagrama de clases}
+\subsubsection{Diagrama de clases}
 \begin{center}
 \begin{tikzpicture}[
   font=\sffamily,
@@ -177,23 +204,56 @@ Desarrollo de una clase denominada \texttt{Suma}, la cual posee múltiples méto
 \end{tikzpicture}
 \end{center}
 
-\subsection{Link}
-Para revisar este ejercicio en el repositorio visite:\\
+\subsubsection{Link}
 \url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_2_10}
 
 
 \newpage
 \section{Ejercicio 2.11. Sobrecarga de constructores}
-Definición de clases con constructores sobrecargados utilizando \texttt{Empleado} y \texttt{Caja}. Se hace uso de la invocación \texttt{this()} para reutilizar la lógica de inicialización en constructores que reciben más parámetros.
 
-\subsection{Código Fuente}
+\subsection{Enunciado (Ejemplo del Texto): Clase ArtículoCientífico}
+El ejemplo muestra la sobrecarga de constructores, utilizando \texttt{this()} para llamar a un constructor con menos parámetros desde uno con mayor cantidad de datos.
+
+\subsubsection{Código Fuente}
+\lstinputlisting[language=Java]{Ejercicio_2_11/ArticuloCientifico.java}
+
+\subsubsection{Diagrama de clases}
+\begin{center}
+\begin{tikzpicture}[
+  font=\sffamily,
+  label/.style={font=\scriptsize\sffamily, fill=white, inner sep=1.5pt}
+]
+\umlclass{Articulo}{(0,0)}{14cm}{umlHeader}{ArticuloCientifico}{%
+  - título: String\\
+  - autor: String\\
+  - palabrasClaves: String[]\\
+  - publicación: String\\
+  - año: int\\
+  - resumen: String
+}{%
+  + ArticuloCientifico(título: String, autor: String)\\
+  + ArticuloCientifico(título: String, autor: String, palabrasClaves: String[], publicación: String, año: int)\\
+  + ArticuloCientifico(título: String, autor: String, palabrasClaves: String[], publicación: String, año: int, resumen: String)\\
+  + imprimir(): void\\
+  + main(args: String[])\$
+}
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Link}
+\url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_2_11/ArticuloCientifico.java}
+
+\subsection{Ejercicio Propuesto: Clases Empleado y Caja}
+Definición de clases con constructores sobrecargados utilizando \texttt{Empleado} y \texttt{Caja}.
+
+\subsubsection{Código Fuente}
 \textbf{Clase Empleado:}
 \lstinputlisting[language=Java]{Ejercicio_2_11/Empleado.java}
 
 \textbf{Clase Caja:}
 \lstinputlisting[language=Java]{Ejercicio_2_11/Caja.java}
 
-\subsection{Diagrama de clases}
+\subsubsection{Diagrama de clases}
 \begin{center}
 \begin{tikzpicture}[
   font=\sffamily,
@@ -227,26 +287,62 @@ Definición de clases con constructores sobrecargados utilizando \texttt{Emplead
 \end{tikzpicture}
 \end{center}
 
-\subsection{Link}
-Para revisar este ejercicio en el repositorio visite:\\
+\subsubsection{Link}
 \url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_2_11}
 
 
 \newpage
 \section{Ejercicio 4.4. Polimorfismo}
-Demostración de casting y asignación de subclases a referencias de la superclase.
 
-\subsection{Código Fuente}
+\subsection{Enunciado (Ejemplo del Texto): Clase Profesor y ProfesorTitular}
+Instanciación de la clase \texttt{ProfesorTitular} asignada a una referencia de tipo \texttt{Profesor}. Se ejecutan métodos de polimorfismo dinámico.
+
+\subsubsection{Código Fuente}
 \textbf{Clase Profesor:}
 \lstinputlisting[language=Java]{Ejercicio_4_4/Profesores/Profesor.java}
 
 \textbf{Clase ProfesorTitular:}
 \lstinputlisting[language=Java]{Ejercicio_4_4/Profesores/ProfesorTitular.java}
 
-\textbf{Clase Prueba:}
+\textbf{Clase PruebaEnunciado:}
+\lstinputlisting[language=Java]{Ejercicio_4_4/Profesores/PruebaEnunciado.java}
+
+\subsubsection{Diagrama de clases}
+\begin{center}
+\begin{tikzpicture}[
+  font=\sffamily,
+  inheritance/.style={draw=inheritColor, line width=0.8pt, -{Triangle[open, length=6pt, width=8pt]}}
+]
+\umlclass{Profesor}{(0,3.5)}{4cm}{umlHeader}{Profesor}{%
+}{%
+  \# imprimir(): void
+}
+
+\umlclass{ProfesorTitular}{(0,0)}{4cm}{umlHeader2}{ProfesorTitular}{%
+}{%
+  \# imprimir(): void
+}
+
+\umlclass{PruebaEnunciado}{(6,1.75)}{4.5cm}{umlHeader}{PruebaEnunciado}{%
+}{%
+  + main(args: String[])\$
+}
+
+\draw[inheritance] (ProfesorTitular.north) -- (Profesor.south);
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Link}
+\url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_4_4/Profesores}
+
+\subsection{Ejercicio Propuesto: Casting en Prueba}
+Uso del casteo manual explícito para cambiar el tipo estático de la referencia de regreso a la clase original.
+
+\subsubsection{Código Fuente}
+\textbf{Clase Prueba (Propuesta):}
 \lstinputlisting[language=Java]{Ejercicio_4_4/Profesores/Prueba.java}
 
-\subsection{Diagrama de clases}
+\subsubsection{Diagrama de clases}
 \begin{center}
 \begin{tikzpicture}[
   font=\sffamily,
@@ -271,26 +367,64 @@ Demostración de casting y asignación de subclases a referencias de la supercla
 \end{tikzpicture}
 \end{center}
 
-\subsection{Link}
-Para revisar este ejercicio en el repositorio visite:\\
+\subsubsection{Link}
 \url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_4_4}
 
 
 \newpage
 \section{Ejercicio 4.6. Métodos polimórficos}
-Uso de un \texttt{Vector} genérico con la superclase que aloja diferentes instancias y enlazado dinámico al ejecutar \texttt{imprimir()}.
 
-\subsection{Código Fuente}
+\subsection{Enunciado (Ejemplo del Texto): Error de tipo estático}
+El ejemplo muestra que invocar un método de una clase hija que no existe en la clase padre genera un error de compilación si la variable pertenece a la clase padre. \textbf{Nota de implementación:} Se ha agregado un casteo \texttt{(ProfesorTitular)} en el código fuente para corregir el error intencional del libro.
+
+\subsubsection{Código Fuente}
 \textbf{Clase Profesor:}
 \lstinputlisting[language=Java]{Ejercicio_4_6/Profesores/Profesor.java}
 
 \textbf{Clase ProfesorTitular:}
 \lstinputlisting[language=Java]{Ejercicio_4_6/Profesores/ProfesorTitular.java}
 
-\textbf{Clase Prueba:}
+\textbf{Clase Prueba3:}
+\lstinputlisting[language=Java]{Ejercicio_4_6/Profesores/Prueba3.java}
+
+\subsubsection{Diagrama de clases}
+\begin{center}
+\begin{tikzpicture}[
+  font=\sffamily,
+  inheritance/.style={draw=inheritColor, line width=0.8pt, -{Triangle[open, length=6pt, width=8pt]}}
+]
+\umlclass{Profesor}{(0,3.5)}{4cm}{umlHeader}{Profesor}{%
+}{%
+  \# imprimir(): void
+}
+
+\umlclass{ProfesorTitular}{(0,0)}{4cm}{umlHeader2}{ProfesorTitular}{%
+  \~{} años: int = 0
+}{%
+  \# imprimir(): void\\
+  \# imprimirAños(): void
+}
+
+\umlclass{Prueba3}{(6,1.75)}{4cm}{umlHeader}{Prueba3}{%
+}{%
+  + main(args: String[])\$
+}
+
+\draw[inheritance] (ProfesorTitular.north) -- (Profesor.south);
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Link}
+\url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_4_6/Profesores}
+
+\subsection{Ejercicio Propuesto: Vector Genérico}
+Uso de un \texttt{Vector} sin genéricos para almacenar objetos \texttt{Profesor} y usar polimorfismo dinámico al iterarlo.
+
+\subsubsection{Código Fuente}
+\textbf{Clase Prueba (Propuesta):}
 \lstinputlisting[language=Java]{Ejercicio_4_6/Profesores/Prueba.java}
 
-\subsection{Diagrama de clases}
+\subsubsection{Diagrama de clases}
 \begin{center}
 \begin{tikzpicture}[
   font=\sffamily,
@@ -318,16 +452,107 @@ Uso de un \texttt{Vector} genérico con la superclase que aloja diferentes insta
 \end{tikzpicture}
 \end{center}
 
-\subsection{Link}
-Para revisar este ejercicio en el repositorio visite:\\
+\subsubsection{Link}
 \url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_4_6}
 
 
 \newpage
 \section{Ejercicio 4.7. Clases abstractas}
+
+\subsection{Enunciado (Ejemplo del Texto): Jerarquía Animales}
+El ejemplo muestra cómo crear una jerarquía usando clases abstractas como \texttt{Animal}, \texttt{Cánido} y \texttt{Felino} para categorizar clases concretas.
+
+\subsubsection{Código Fuente}
+\textbf{Clase Animal:}
+\lstinputlisting[language=Java]{Ejercicio_4_7/Animales/Animal.java}
+
+\textbf{Clases Cánido y Felino:}
+\lstinputlisting[language=Java]{Ejercicio_4_7/Animales/Cánido.java}
+\lstinputlisting[language=Java]{Ejercicio_4_7/Animales/Felino.java}
+
+\textbf{Clases Concretas (Perro, Lobo, León, Gato):}
+\lstinputlisting[language=Java]{Ejercicio_4_7/Animales/Perro.java}
+\lstinputlisting[language=Java]{Ejercicio_4_7/Animales/Lobo.java}
+\lstinputlisting[language=Java]{Ejercicio_4_7/Animales/León.java}
+\lstinputlisting[language=Java]{Ejercicio_4_7/Animales/Gato.java}
+
+\textbf{Clase Prueba:}
+\lstinputlisting[language=Java]{Ejercicio_4_7/Animales/Prueba.java}
+
+\subsubsection{Diagrama de clases}
+\begin{center}
+\begin{tikzpicture}[
+  font=\sffamily,
+  inheritance/.style={draw=inheritColor, line width=0.8pt, -{Triangle[open, length=6pt, width=8pt]}}
+]
+\umlclass{Animal}{(4,7)}{5.5cm}{umlHeader}{\textit{Animal}}{%
+  \# sonido: String\\
+  \# alimentos: String\\
+  \# hábitat: String\\
+  \# nombreCientífico: String
+}{%
+  + getNombreCientífico(): String \textit{abstract}\\
+  + getSonido(): String \textit{abstract}\\
+  + getAlimentos(): String \textit{abstract}\\
+  + getHábitat(): String \textit{abstract}
+}
+
+\umlclass{Canido}{(1,4)}{2.5cm}{umlHeader2}{\textit{Cánido}}{%
+}{%
+}
+
+\umlclass{Felino}{(7,4)}{2.5cm}{umlHeader2}{\textit{Felino}}{%
+}{%
+}
+
+\umlclass{Perro}{(-1,1)}{4cm}{umlHeader}{Perro}{%
+}{%
+  + getSonido(): String\\
+  + getAlimentos(): String\\
+  + getHábitat(): String\\
+  + getNombreCientífico(): String
+}
+
+\umlclass{Lobo}{(3.5,1)}{4cm}{umlHeader}{Lobo}{%
+}{%
+  + getSonido(): String\\
+  + getAlimentos(): String\\
+  + getHábitat(): String\\
+  + getNombreCientífico(): String
+}
+
+\umlclass{Gato}{(8,1)}{4cm}{umlHeader}{Gato}{%
+}{%
+  + getSonido(): String\\
+  + getAlimentos(): String\\
+  + getHábitat(): String\\
+  + getNombreCientífico(): String
+}
+
+\umlclass{Leon}{(12.5,1)}{4cm}{umlHeader}{León}{%
+}{%
+  + getSonido(): String\\
+  + getAlimentos(): String\\
+  + getHábitat(): String\\
+  + getNombreCientífico(): String
+}
+
+\draw[inheritance] (Canido.north) -- (Animal.south);
+\draw[inheritance] (Felino.north) -- (Animal.south);
+\draw[inheritance] (Perro.north) -- (Canido.south);
+\draw[inheritance] (Lobo.north) -- (Canido.south);
+\draw[inheritance] (Gato.north) -- (Felino.south);
+\draw[inheritance] (Leon.north) -- (Felino.south);
+\end{tikzpicture}
+\end{center}
+
+\subsubsection{Link}
+\url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_4_7/Animales}
+
+\subsection{Ejercicio Propuesto: Jerarquía Numérica}
 Clase abstracta \texttt{Numérica} y su implementación concreta en \texttt{Fracción}.
 
-\subsection{Código Fuente}
+\subsubsection{Código Fuente}
 \textbf{Clase Numérica:}
 \lstinputlisting[language=Java]{Ejercicio_4_7/Numerica.java}
 
@@ -337,7 +562,7 @@ Clase abstracta \texttt{Numérica} y su implementación concreta en \texttt{Frac
 \textbf{Clase Prueba:}
 \lstinputlisting[language=Java]{Ejercicio_4_7/Prueba.java}
 
-\subsection{Diagrama de clases}
+\subsubsection{Diagrama de clases}
 \begin{center}
 \begin{tikzpicture}[
   font=\sffamily,
@@ -379,8 +604,7 @@ Clase abstracta \texttt{Numérica} y su implementación concreta en \texttt{Frac
 \end{tikzpicture}
 \end{center}
 
-\subsection{Link}
-Para revisar este ejercicio en el repositorio visite:\\
+\subsubsection{Link}
 \url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_4_7}
 
 \end{document}
