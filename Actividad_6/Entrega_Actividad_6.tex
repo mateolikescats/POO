@@ -1,0 +1,120 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{titling}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{\?`}}1 {¡}{{\!`}}1
+}
+\lstset{style=mystyle}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{UNAL \\ Mateo Quiceno Zapata}
+\chead{Actividad 6 \\ Programación Orientada a Objetos \\ (3007744)}
+\rhead{\today \\ mquicenoz@unal.edu.co}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\cfoot{\thepage}
+
+\title{\vspace{-2cm}Entrega Actividad 6: Ejercicios Propuestos}
+\date{}
+\author{}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\section{Ejercicio 2.10. Sobrecarga de métodos}
+\textbf{Enunciado:}
+Definir una clase denominada \texttt{Suma}, la cual tiene varios métodos \texttt{sumar} sobrecargados:
+\begin{itemize}
+    \item Un método \texttt{sumar} que obtiene la suma de dos valores enteros pasados como parámetros.
+    \item Un método \texttt{sumar} que obtiene la suma de tres valores enteros pasados como parámetros.
+    \item Un método \texttt{sumar} que obtiene la suma de dos valores double pasados como parámetros.
+    \item Un método \texttt{sumar} que obtiene la suma de tres valores double pasados como parámetros.
+\end{itemize}
+
+\subsection{Código Fuente}
+\lstinputlisting[language=Java]{Ejercicio_2_10/Suma.java}
+
+\section{Ejercicio 2.11. Sobrecarga de constructores}
+\textbf{Enunciado:}
+\begin{itemize}
+    \item Definir una clase \texttt{Empleado} que tiene como atributos: identificador, nombre, apellidos y edad. Contiene dos constructores: uno sin parámetros con valores por defecto y otro con parámetros.
+    \item Definir una clase \texttt{Caja} que tiene como atributos base, anchura, altura y tipo. Contiene varios constructores sobrecargados, incluyendo uno que invoca a otro mediante \texttt{this()}.
+\end{itemize}
+
+\subsection{Código Fuente}
+\textbf{Clase Empleado:}
+\lstinputlisting[language=Java]{Ejercicio_2_11/Empleado.java}
+
+\textbf{Clase Caja:}
+\lstinputlisting[language=Java]{Ejercicio_2_11/Caja.java}
+
+\section{Ejercicio 4.4. Polimorfismo}
+\textbf{Enunciado:}
+¿Cuál es el resultado de la ejecución del siguiente programa basado en el ejercicio anterior (donde se hace un casting de la instancia)?
+
+\subsection{Código Fuente y Resultado}
+\textbf{Clase Profesor y ProfesorTitular:}
+\lstinputlisting[language=Java]{Ejercicio_4_4/Profesores/Profesor.java}
+\lstinputlisting[language=Java]{Ejercicio_4_4/Profesores/ProfesorTitular.java}
+
+\textbf{Clase Prueba:}
+\lstinputlisting[language=Java]{Ejercicio_4_4/Profesores/Prueba.java}
+
+\section{Ejercicio 4.6. Métodos polimórficos}
+\textbf{Enunciado:}
+¿Cuál es el resultado de la ejecución del siguiente programa que utiliza un Vector de objetos \texttt{Profesor} instanciados tanto como \texttt{Profesor} y como \texttt{ProfesorTitular}?
+
+\subsection{Código Fuente y Resultado}
+\textbf{Clase Prueba:}
+\lstinputlisting[language=Java]{Ejercicio_4_6/Profesores/Prueba.java}
+
+\section{Ejercicio 4.7. Clases abstractas}
+\textbf{Enunciado:}
+\begin{itemize}
+    \item Definir una clase abstracta denominada \texttt{Numérica} con métodos abstractos: \texttt{toString()}, \texttt{equals()}, \texttt{sumar()}, \texttt{restar()}, \texttt{multiplicar()} y \texttt{dividir()}.
+    \item Definir una clase \texttt{Fracción} que representa un número fraccionario, hereda de \texttt{Numérica}, implementa sus métodos y tiene numerador y denominador.
+    \item Crear una clase de prueba que utilice los métodos implementados.
+\end{itemize}
+
+\subsection{Código Fuente}
+\textbf{Clase Numérica:}
+\lstinputlisting[language=Java]{Ejercicio_4_7/Numerica.java}
+
+\textbf{Clase Fracción:}
+\lstinputlisting[language=Java]{Ejercicio_4_7/Fraccion.java}
+
+\textbf{Clase Prueba:}
+\lstinputlisting[language=Java]{Ejercicio_4_7/Prueba.java}
+
+\end{document}

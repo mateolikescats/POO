@@ -38,3 +38,10 @@ La Actividad 5 implementa una solución completa de persistencia física en arch
 - Separación de responsabilidades mediante la lógica de persistencia (`GestorArchivoBiblioteca`) y la lógica de presentación (`VentanaBiblioteca`).
 - Implementación de controles lógicos para evitar la redundancia de datos (control de títulos duplicados) y validación de campos obligatorios en el formulario.
 - Automatización de pruebas de interfaz mediante renderizado a memoria buffer para la generación de capturas de pantalla limpias y deterministas.
+
+## Actividad 6
+La Actividad 6 se centra en conceptos avanzados de la Programación Orientada a Objetos como la sobrecarga, el polimorfismo y las clases abstractas.
+**Aprendizajes:**
+- Implementación de **Sobrecarga de Métodos y Constructores** para instanciar clases de múltiples maneras.
+- Aplicación de **Polimorfismo** mediante casting de objetos y el uso de referencias de una superclase.
+- Diseño y uso de **Clases Abstractas** y su implementación concreta en subclases, incluyendo herencia y sobreescritura de métodos.
