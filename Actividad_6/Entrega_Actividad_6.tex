@@ -41,6 +41,23 @@
 \usepackage{pseudocode} % Environment for specifying algorithms in a natural way
 \usepackage{booktabs} % Enhances quality of tables
 
+% Configuración de listings
+\lstset{
+    language=Java,         
+    basicstyle=\ttfamily\scriptsize,    
+    keywordstyle=\color{blue!70!black}\bfseries,
+    commentstyle=\color{green!50!black}\itshape,
+    stringstyle=\color{orange!80!black},
+    numbers=left,            
+    frame=lines,
+    breaklines=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    showstringspaces=false,
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+             {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{\?`}}1 {¡}{{\!`}}1             
+}
+
 % Configuración TikZ y Árboles
 \usepackage{tikz}
 \usepackage{tikz-qtree} % Easy tree drawing tool
@@ -130,42 +147,27 @@ cruizh@unal.edu.co
 \medskip\hrule % Lower rule
 \bigskip
 
+\begin{center}
+\Large\textbf{Entrega Actividad 6: Ejercicios Propuestos}
+\end{center}
+\vspace{0.5cm}
+
 %----------------------------------------------------------------------------------------
 %	ARTICLE CONTENTS
 %----------------------------------------------------------------------------------------
 
-\section{Resolución de Ejercicios Propuestos}
-Desarrollo de las soluciones para los ejercicios propuestos de la Actividad 6. Esta sección aborda los principios fundamentales de la Programación Orientada a Objetos: sobrecarga (de métodos y constructores), polimorfismo dinámico y la implementación de clases abstractas.
+\section{Ejercicio 2.10. Sobrecarga de métodos}
+Desarrollo de una clase denominada \texttt{Suma}, la cual posee múltiples métodos \texttt{sumar} con el mismo nombre pero con diferentes cantidades o tipos de parámetros (enteros y dobles).
 
-\bigskip
+\subsection{Código Fuente}
+\lstinputlisting[language=Java]{Ejercicio_2_10/Suma.java}
 
-\subsection{Descripción de los Ejercicios}
-A continuación se detallan las lógicas implementadas para los diferentes ejercicios:
-
-\begin{itemize}
-    \item \textbf{Ejercicio 2.10 (Sobrecarga de Métodos):} Se implementó la clase \texttt{Suma} demostrando cómo una clase puede tener múltiples versiones de un mismo método cambiando la signatura. Se definieron cuatro operaciones de suma que aceptan y devuelven tanto enteros como decimales.
-    
-    \item \textbf{Ejercicio 2.11 (Sobrecarga de Constructores):} Se modelaron las clases \texttt{Empleado} y \texttt{Caja}. Para \texttt{Empleado} se proveen constructores vacíos (que asignan valores por defecto) y con parámetros. Para la clase \texttt{Caja}, se ilustró la optimización del código utilizando la palabra reservada \texttt{this()} para llamar a un constructor general desde constructores más específicos.
-
-    \item \textbf{Ejercicio 4.4 y 4.6 (Polimorfismo):} Utilizando las clases \texttt{Profesor} y \texttt{ProfesorTitular}, se ejecutaron pruebas de escritorio. En el código se generó un \texttt{Vector} de profesores donde la máquina virtual invocó las funciones dinámicamente según la referencia instanciada en memoria, demostrando el comportamiento del enlazado tardío.
-
-    \item \textbf{Ejercicio 4.7 (Clases Abstractas):} Se generó el contrato arquitectónico a través de la clase abstracta \texttt{Numérica}. Posteriormente, la clase concreta \texttt{Fracción} implementó toda la lógica aritmética heredada, asegurando la simplificación por MCD tras cada operación.
-\end{itemize}
-
-\subsection{Diagramas de clases}
-Se presentan las relaciones, métodos y atributos modelados para los distintos ejercicios.
-
+\subsection{Diagrama de clases}
 \begin{center}
-\vspace{0.5cm}
-\resizebox{0.9\textwidth}{!}{%
 \begin{tikzpicture}[
   font=\sffamily,
-  inheritance/.style={draw=inheritColor, line width=0.8pt, -{Triangle[open, length=6pt, width=8pt]}},
   label/.style={font=\scriptsize\sffamily, fill=white, inner sep=1.5pt}
 ]
-
-% Ejercicio 2.10
-\begin{scope}[local bounding box=scope210]
 \umlclass{Suma}{(0,0)}{6.5cm}{umlHeader}{Suma}{%
 }{%
   + sumar(a: int, b: int): int\\
@@ -174,12 +176,32 @@ Se presentan las relaciones, métodos y atributos modelados para los distintos e
   + sumar(a: double, b: double, c: double): double\\
   + main(args: String[])\$
 }
-\end{scope}
-\node[above=0.2cm of scope210, font=\bfseries] {Ejercicio 2.10};
+\end{tikzpicture}
+\end{center}
 
-% Ejercicio 2.11
-\begin{scope}[shift={(8,0)}, local bounding box=scope211]
-\umlclass{Empleado}{(0,2)}{6.5cm}{umlHeader}{Empleado}{%
+\subsection{Link}
+Para revisar este ejercicio en el repositorio visite:\\
+\url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_2_10}
+
+
+\newpage
+\section{Ejercicio 2.11. Sobrecarga de constructores}
+Definición de clases con constructores sobrecargados utilizando \texttt{Empleado} y \texttt{Caja}. Se hace uso de la invocación \texttt{this()} para reutilizar la lógica de inicialización en constructores que reciben más parámetros.
+
+\subsection{Código Fuente}
+\textbf{Clase Empleado:}
+\lstinputlisting[language=Java]{Ejercicio_2_11/Empleado.java}
+
+\textbf{Clase Caja:}
+\lstinputlisting[language=Java]{Ejercicio_2_11/Caja.java}
+
+\subsection{Diagrama de clases}
+\begin{center}
+\begin{tikzpicture}[
+  font=\sffamily,
+  label/.style={font=\scriptsize\sffamily, fill=white, inner sep=1.5pt}
+]
+\umlclass{Empleado}{(0,0)}{6.5cm}{umlHeader}{Empleado}{%
   - identificador: int\\
   - nombre: String\\
   - apellidos: String\\
@@ -190,7 +212,8 @@ Se presentan las relaciones, métodos y atributos modelados para los distintos e
   + imprimir(): void\\
   + main(args: String[])\$
 }
-\umlclass{Caja}{(0,-3.5)}{6.5cm}{umlHeader2}{Caja}{%
+
+\umlclass{Caja}{(8,0)}{7.0cm}{umlHeader2}{Caja}{%
   - base: double\\
   - anchura: double\\
   - altura: double\\
@@ -203,25 +226,78 @@ Se presentan las relaciones, métodos y atributos modelados para los distintos e
   + imprimir(): void\\
   + main(args: String[])\$
 }
-\end{scope}
-\node[above=0.2cm of scope211, font=\bfseries] {Ejercicio 2.11};
-
 \end{tikzpicture}
-}
 \end{center}
 
-\vspace{1cm}
+\subsection{Link}
+Para revisar este ejercicio en el repositorio visite:\\
+\url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_2_11}
 
+
+\newpage
+\section{Ejercicio 4.4. Polimorfismo}
+Demostración de casting y asignación de subclases a referencias de la superclase.
+
+\subsection{Código Fuente}
+\textbf{Clase Profesor:}
+\lstinputlisting[language=Java]{Ejercicio_4_4/Profesores/Profesor.java}
+
+\textbf{Clase ProfesorTitular:}
+\lstinputlisting[language=Java]{Ejercicio_4_4/Profesores/ProfesorTitular.java}
+
+\textbf{Clase Prueba:}
+\lstinputlisting[language=Java]{Ejercicio_4_4/Profesores/Prueba.java}
+
+\subsection{Diagrama de clases}
 \begin{center}
-\resizebox{0.9\textwidth}{!}{%
 \begin{tikzpicture}[
   font=\sffamily,
-  inheritance/.style={draw=inheritColor, line width=0.8pt, -{Triangle[open, length=6pt, width=8pt]}},
-  label/.style={font=\scriptsize\sffamily, fill=white, inner sep=1.5pt}
+  inheritance/.style={draw=inheritColor, line width=0.8pt, -{Triangle[open, length=6pt, width=8pt]}}
 ]
+\umlclass{Profesor}{(0,3.5)}{4cm}{umlHeader}{Profesor}{%
+}{%
+  \# imprimir(): void
+}
 
-% Ejercicio 4.4 y 4.6
-\begin{scope}[local bounding box=scope46]
+\umlclass{ProfesorTitular}{(0,0)}{4cm}{umlHeader2}{ProfesorTitular}{%
+}{%
+  \# imprimir(): void
+}
+
+\umlclass{Prueba}{(6,1.75)}{4cm}{umlHeader}{Prueba}{%
+}{%
+  + main(args: String[])\$
+}
+
+\draw[inheritance] (ProfesorTitular.north) -- (Profesor.south);
+\end{tikzpicture}
+\end{center}
+
+\subsection{Link}
+Para revisar este ejercicio en el repositorio visite:\\
+\url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_4_4}
+
+
+\newpage
+\section{Ejercicio 4.6. Métodos polimórficos}
+Uso de un \texttt{Vector} genérico con la superclase que aloja diferentes instancias y enlazado dinámico al ejecutar \texttt{imprimir()}.
+
+\subsection{Código Fuente}
+\textbf{Clase Profesor:}
+\lstinputlisting[language=Java]{Ejercicio_4_6/Profesores/Profesor.java}
+
+\textbf{Clase ProfesorTitular:}
+\lstinputlisting[language=Java]{Ejercicio_4_6/Profesores/ProfesorTitular.java}
+
+\textbf{Clase Prueba:}
+\lstinputlisting[language=Java]{Ejercicio_4_6/Profesores/Prueba.java}
+
+\subsection{Diagrama de clases}
+\begin{center}
+\begin{tikzpicture}[
+  font=\sffamily,
+  inheritance/.style={draw=inheritColor, line width=0.8pt, -{Triangle[open, length=6pt, width=8pt]}}
+]
 \umlclass{Profesor}{(0,3.5)}{4cm}{umlHeader}{Profesor}{%
 }{%
   \# imprimir(): void
@@ -233,12 +309,42 @@ Se presentan las relaciones, métodos y atributos modelados para los distintos e
   \# imprimir(): void\\
   \# imprimirAños(): void
 }
-\draw[inheritance] (ProfesorTitular.north) -- (Profesor.south);
-\end{scope}
-\node[above=0.2cm of scope46, font=\bfseries] {Ejercicio 4.4 y 4.6};
 
-% Ejercicio 4.7
-\begin{scope}[shift={(8,0)}, local bounding box=scope47]
+\umlclass{Prueba}{(6,1.75)}{4cm}{umlHeader}{Prueba}{%
+  \~{} profesores: Vector<Profesor>
+}{%
+  + main(args: String[])\$
+}
+
+\draw[inheritance] (ProfesorTitular.north) -- (Profesor.south);
+\end{tikzpicture}
+\end{center}
+
+\subsection{Link}
+Para revisar este ejercicio en el repositorio visite:\\
+\url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_4_6}
+
+
+\newpage
+\section{Ejercicio 4.7. Clases abstractas}
+Clase abstracta \texttt{Numérica} y su implementación concreta en \texttt{Fracción}.
+
+\subsection{Código Fuente}
+\textbf{Clase Numérica:}
+\lstinputlisting[language=Java]{Ejercicio_4_7/Numerica.java}
+
+\textbf{Clase Fracción:}
+\lstinputlisting[language=Java]{Ejercicio_4_7/Fraccion.java}
+
+\textbf{Clase Prueba:}
+\lstinputlisting[language=Java]{Ejercicio_4_7/Prueba.java}
+
+\subsection{Diagrama de clases}
+\begin{center}
+\begin{tikzpicture}[
+  font=\sffamily,
+  inheritance/.style={draw=inheritColor, line width=0.8pt, -{Triangle[open, length=6pt, width=8pt]}}
+]
 \umlclass{Numerica}{(0,5)}{6.5cm}{umlHeader}{\textit{Numérica}}{%
 }{%
   + toString(): String \textit{abstract}\\
@@ -265,32 +371,18 @@ Se presentan las relaciones, métodos y atributos modelados para los distintos e
   - simplificar(f: Fracción): Fracción\\
   - mcd(a: int, b: int): int
 }
-\draw[inheritance] (Fraccion.north) -- (Numerica.south);
-\end{scope}
-\node[above=0.2cm of scope47, font=\bfseries] {Ejercicio 4.7};
 
-\end{tikzpicture}
+\umlclass{Prueba}{(8,2.5)}{4cm}{umlHeader}{Prueba}{%
+}{%
+  + main(args: String[])\$
 }
+
+\draw[inheritance] (Fraccion.north) -- (Numerica.south);
+\end{tikzpicture}
 \end{center}
 
-\vspace{1cm}
-
-\subsection{Casos de uso y Resultados (Pruebas)}
-\begin{itemize}
-    \item \textbf{Ejercicio 2.10 y 2.11:} La ejecución retorna los valores instanciados y sumados correspondientes a las cajas, empleados y operaciones, asegurando la sobrecarga exitosa sin errores de compilación.
-    \item \textbf{Ejercicio 4.4 y 4.6:} El casting se ejecutó con éxito. La salida del sistema, demostrando polimorfismo dinámico, fue \textit{``Es un profesor.''} y seguido \textit{``Es un profesor titular.''}
-    \item \textbf{Ejercicio 4.7:} Los resultados probaron igualdad verdadera cruzando las fracciones `1/2` y `2/4`. Además las sumas, multiplicaciones y divisiones generaron nuevas fracciones con el numerador y denominador correctos y simplificados.
-\end{itemize}
-
-\subsection{Links a los Repositorios}
-Para verificar el funcionamiento y el código fuente respectivo, se debe ejecutar cada archivo \texttt{Java} alojado en el repositorio de GitHub:
-
-\begin{itemize}
-    \item \textbf{Ejercicio 2.10:} \url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_2_10}
-    \item \textbf{Ejercicio 2.11:} \url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_2_11}
-    \item \textbf{Ejercicio 4.4:} \url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_4_4}
-    \item \textbf{Ejercicio 4.6:} \url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_4_6}
-    \item \textbf{Ejercicio 4.7:} \url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_4_7}
-\end{itemize}
+\subsection{Link}
+Para revisar este ejercicio en el repositorio visite:\\
+\url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_4_7}
 
 \end{document}
