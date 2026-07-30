@@ -5,5 +5,5 @@ package Animales;
  * animales. Es una subclase de Animal.
  * @version 1.2/2020
  */
-public abstract class Cánido extends Animal {
+public abstract class Canido extends Animal {
 }

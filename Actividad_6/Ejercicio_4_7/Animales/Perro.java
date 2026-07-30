@@ -4,7 +4,7 @@ package Animales;
  * Esta clase concreta denominada Perro es una subclase de Cánido.
  * @version 1.2/2020
  */
-public class Perro extends Cánido {
+public class Perro extends Canido {
     /**
      * Método que devuelve un String con el sonido de un perro
      * @return Un valor String con el sonido de un perro: "Ladrido"

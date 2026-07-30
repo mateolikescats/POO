@@ -16,7 +16,7 @@ public class Prueba {
         animales[0] = new Gato();
         animales[1] = new Perro();
         animales[2] = new Lobo();
-        animales[3] = new León();
+        animales[3] = new Leon();
         
         for (int i = 0; i < animales.length; i++) { /* Recorre el array de animales */
             System.out.println(animales[i].getNombreCientífico());

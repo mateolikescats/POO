@@ -4,7 +4,7 @@ package Animales;
  * Esta clase concreta denominada León es una subclase de Felino.
  * @version 1.2/2020
  */
-public class León extends Felino {
+public class Leon extends Felino {
     /**
      * Método que devuelve un String con el sonido de un león
      * @return Un valor String con el sonido de un león: "Rugido"

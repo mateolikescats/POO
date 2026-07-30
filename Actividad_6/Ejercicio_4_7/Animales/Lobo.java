@@ -4,7 +4,7 @@ package Animales;
  * Esta clase concreta denominada Lobo es una subclase de Cánido.
  * @version 1.2/2020
  */
-public class Lobo extends Cánido {
+public class Lobo extends Canido {
     /**
      * Método que devuelve un String con el sonido de un lobo
      * @return Un valor String con el sonido de un lobo: "Aullido"
