@@ -41,19 +41,6 @@
 \usepackage{pseudocode} % Environment for specifying algorithms in a natural way
 \usepackage{booktabs} % Enhances quality of tables
 
-% Configuración de listings
-\lstset{
-    language=Java,         
-    basicstyle=\ttfamily\small,    
-    keywordstyle=\color{blue!70!black}\bfseries,
-    commentstyle=\color{green!50!black}\itshape,
-    numbers=left,            
-    frame=lines,
-    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
-             {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
-             {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{\?`}}1 {¡}{{\!`}}1             
-}
-
 % Configuración TikZ y Árboles
 \usepackage{tikz}
 \usepackage{tikz-qtree} % Easy tree drawing tool
@@ -143,33 +130,43 @@ cruizh@unal.edu.co
 \medskip\hrule % Lower rule
 \bigskip
 
-\begin{center}
-\Large\textbf{Entrega Actividad 6: Ejercicios Propuestos}
-\end{center}
-\vspace{1cm}
-
 %----------------------------------------------------------------------------------------
 %	ARTICLE CONTENTS
 %----------------------------------------------------------------------------------------
 
-\section{Ejercicio 2.10. Sobrecarga de métodos}
-\textbf{Enunciado:}
-Definir una clase denominada \texttt{Suma}, la cual tiene varios métodos \texttt{sumar} sobrecargados:
+\section{Resolución de Ejercicios Propuestos}
+Desarrollo de las soluciones para los ejercicios propuestos de la Actividad 6. Esta sección aborda los principios fundamentales de la Programación Orientada a Objetos: sobrecarga (de métodos y constructores), polimorfismo dinámico y la implementación de clases abstractas.
+
+\bigskip
+
+\subsection{Descripción de los Ejercicios}
+A continuación se detallan las lógicas implementadas para los diferentes ejercicios:
+
 \begin{itemize}
-    \item Un método \texttt{sumar} que obtiene la suma de dos valores enteros pasados como parámetros.
-    \item Un método \texttt{sumar} que obtiene la suma de tres valores enteros pasados como parámetros.
-    \item Un método \texttt{sumar} que obtiene la suma de dos valores double pasados como parámetros.
-    \item Un método \texttt{sumar} que obtiene la suma de tres valores double pasados como parámetros.
+    \item \textbf{Ejercicio 2.10 (Sobrecarga de Métodos):} Se implementó la clase \texttt{Suma} demostrando cómo una clase puede tener múltiples versiones de un mismo método cambiando la signatura. Se definieron cuatro operaciones de suma que aceptan y devuelven tanto enteros como decimales.
+    
+    \item \textbf{Ejercicio 2.11 (Sobrecarga de Constructores):} Se modelaron las clases \texttt{Empleado} y \texttt{Caja}. Para \texttt{Empleado} se proveen constructores vacíos (que asignan valores por defecto) y con parámetros. Para la clase \texttt{Caja}, se ilustró la optimización del código utilizando la palabra reservada \texttt{this()} para llamar a un constructor general desde constructores más específicos.
+
+    \item \textbf{Ejercicio 4.4 y 4.6 (Polimorfismo):} Utilizando las clases \texttt{Profesor} y \texttt{ProfesorTitular}, se ejecutaron pruebas de escritorio. En el código se generó un \texttt{Vector} de profesores donde la máquina virtual invocó las funciones dinámicamente según la referencia instanciada en memoria, demostrando el comportamiento del enlazado tardío.
+
+    \item \textbf{Ejercicio 4.7 (Clases Abstractas):} Se generó el contrato arquitectónico a través de la clase abstracta \texttt{Numérica}. Posteriormente, la clase concreta \texttt{Fracción} implementó toda la lógica aritmética heredada, asegurando la simplificación por MCD tras cada operación.
 \end{itemize}
 
-\subsection{Diagrama de clases}
+\subsection{Diagramas de clases}
+Se presentan las relaciones, métodos y atributos modelados para los distintos ejercicios.
+
 \begin{center}
+\vspace{0.5cm}
+\resizebox{0.9\textwidth}{!}{%
 \begin{tikzpicture}[
   font=\sffamily,
+  inheritance/.style={draw=inheritColor, line width=0.8pt, -{Triangle[open, length=6pt, width=8pt]}},
   label/.style={font=\scriptsize\sffamily, fill=white, inner sep=1.5pt}
 ]
-\umlclass{Suma}{(0,0)}{5cm}{umlHeader}{Suma}{%
-  % Atributos
+
+% Ejercicio 2.10
+\begin{scope}[local bounding box=scope210]
+\umlclass{Suma}{(0,0)}{6.5cm}{umlHeader}{Suma}{%
 }{%
   + sumar(a: int, b: int): int\\
   + sumar(a: int, b: int, c: int): int\\
@@ -177,27 +174,12 @@ Definir una clase denominada \texttt{Suma}, la cual tiene varios métodos \textt
   + sumar(a: double, b: double, c: double): double\\
   + main(args: String[])\$
 }
-\end{tikzpicture}
-\end{center}
+\end{scope}
+\node[above=0.2cm of scope210, font=\bfseries] {Ejercicio 2.10};
 
-\subsection{Código Fuente}
-\lstinputlisting[language=Java]{Ejercicio_2_10/Suma.java}
-
-
-\section{Ejercicio 2.11. Sobrecarga de constructores}
-\textbf{Enunciado:}
-\begin{itemize}
-    \item Definir una clase \texttt{Empleado} que tiene como atributos: identificador, nombre, apellidos y edad. Contiene dos constructores: uno sin parámetros con valores por defecto y otro con parámetros.
-    \item Definir una clase \texttt{Caja} que tiene como atributos base, anchura, altura y tipo. Contiene varios constructores sobrecargados, incluyendo uno que invoca a otro mediante \texttt{this()}.
-\end{itemize}
-
-\subsection{Diagrama de clases}
-\begin{center}
-\begin{tikzpicture}[
-  font=\sffamily,
-  label/.style={font=\scriptsize\sffamily, fill=white, inner sep=1.5pt}
-]
-\umlclass{Empleado}{(0,0)}{6.5cm}{umlHeader}{Empleado}{%
+% Ejercicio 2.11
+\begin{scope}[shift={(8,0)}, local bounding box=scope211]
+\umlclass{Empleado}{(0,2)}{6.5cm}{umlHeader}{Empleado}{%
   - identificador: int\\
   - nombre: String\\
   - apellidos: String\\
@@ -208,8 +190,7 @@ Definir una clase denominada \texttt{Suma}, la cual tiene varios métodos \textt
   + imprimir(): void\\
   + main(args: String[])\$
 }
-
-\umlclass{Caja}{(8,0)}{6.5cm}{umlHeader2}{Caja}{%
+\umlclass{Caja}{(0,-3.5)}{6.5cm}{umlHeader2}{Caja}{%
   - base: double\\
   - anchura: double\\
   - altura: double\\
@@ -222,60 +203,25 @@ Definir una clase denominada \texttt{Suma}, la cual tiene varios métodos \textt
   + imprimir(): void\\
   + main(args: String[])\$
 }
+\end{scope}
+\node[above=0.2cm of scope211, font=\bfseries] {Ejercicio 2.11};
+
 \end{tikzpicture}
+}
 \end{center}
 
-\subsection{Código Fuente}
-\textbf{Clase Empleado:}
-\lstinputlisting[language=Java]{Ejercicio_2_11/Empleado.java}
+\vspace{1cm}
 
-\textbf{Clase Caja:}
-\lstinputlisting[language=Java]{Ejercicio_2_11/Caja.java}
-
-
-\section{Ejercicio 4.4. Polimorfismo}
-\textbf{Enunciado:}
-¿Cuál es el resultado de la ejecución del siguiente programa basado en el ejercicio anterior (donde se hace un casting de la instancia de la subclase a la superclase)?
-
-\subsection{Diagrama de clases}
 \begin{center}
+\resizebox{0.9\textwidth}{!}{%
 \begin{tikzpicture}[
   font=\sffamily,
-  inheritance/.style={draw=inheritColor, line width=0.8pt, -{Triangle[open, length=6pt, width=8pt]}}
+  inheritance/.style={draw=inheritColor, line width=0.8pt, -{Triangle[open, length=6pt, width=8pt]}},
+  label/.style={font=\scriptsize\sffamily, fill=white, inner sep=1.5pt}
 ]
-\umlclass{Profesor}{(0,3)}{4cm}{umlHeader}{Profesor}{%
-}{%
-  \# imprimir(): void
-}
 
-\umlclass{ProfesorTitular}{(0,0)}{4cm}{umlHeader2}{ProfesorTitular}{%
-}{%
-  \# imprimir(): void
-}
-
-\draw[inheritance] (ProfesorTitular.north) -- (Profesor.south);
-\end{tikzpicture}
-\end{center}
-
-\subsection{Código Fuente y Resultado}
-\textbf{Clase Profesor y ProfesorTitular:}
-\lstinputlisting[language=Java]{Ejercicio_4_4/Profesores/Profesor.java}
-\lstinputlisting[language=Java]{Ejercicio_4_4/Profesores/ProfesorTitular.java}
-
-\textbf{Clase Prueba:}
-\lstinputlisting[language=Java]{Ejercicio_4_4/Profesores/Prueba.java}
-
-
-\section{Ejercicio 4.6. Métodos polimórficos}
-\textbf{Enunciado:}
-¿Cuál es el resultado de la ejecución del siguiente programa que utiliza un Vector de objetos \texttt{Profesor} instanciados tanto como \texttt{Profesor} y como \texttt{ProfesorTitular}?
-
-\subsection{Diagrama de clases}
-\begin{center}
-\begin{tikzpicture}[
-  font=\sffamily,
-  inheritance/.style={draw=inheritColor, line width=0.8pt, -{Triangle[open, length=6pt, width=8pt]}}
-]
+% Ejercicio 4.4 y 4.6
+\begin{scope}[local bounding box=scope46]
 \umlclass{Profesor}{(0,3.5)}{4cm}{umlHeader}{Profesor}{%
 }{%
   \# imprimir(): void
@@ -287,31 +233,13 @@ Definir una clase denominada \texttt{Suma}, la cual tiene varios métodos \textt
   \# imprimir(): void\\
   \# imprimirAños(): void
 }
-
 \draw[inheritance] (ProfesorTitular.north) -- (Profesor.south);
-\end{tikzpicture}
-\end{center}
+\end{scope}
+\node[above=0.2cm of scope46, font=\bfseries] {Ejercicio 4.4 y 4.6};
 
-\subsection{Código Fuente y Resultado}
-\textbf{Clase Prueba:}
-\lstinputlisting[language=Java]{Ejercicio_4_6/Profesores/Prueba.java}
-
-
-\section{Ejercicio 4.7. Clases abstractas}
-\textbf{Enunciado:}
-\begin{itemize}
-    \item Definir una clase abstracta denominada \texttt{Numérica} con métodos abstractos: \texttt{toString()}, \texttt{equals()}, \texttt{sumar()}, \texttt{restar()}, \texttt{multiplicar()} y \texttt{dividir()}.
-    \item Definir una clase \texttt{Fracción} que representa un número fraccionario, hereda de \texttt{Numérica}, implementa sus métodos y tiene numerador y denominador.
-    \item Crear una clase de prueba que utilice los métodos implementados.
-\end{itemize}
-
-\subsection{Diagrama de clases}
-\begin{center}
-\begin{tikzpicture}[
-  font=\sffamily,
-  inheritance/.style={draw=inheritColor, line width=0.8pt, -{Triangle[open, length=6pt, width=8pt]}}
-]
-\umlclass{Numerica}{(0,4.5)}{5cm}{umlHeader}{\textit{Numérica}}{%
+% Ejercicio 4.7
+\begin{scope}[shift={(8,0)}, local bounding box=scope47]
+\umlclass{Numerica}{(0,5)}{6.5cm}{umlHeader}{\textit{Numérica}}{%
 }{%
   + toString(): String \textit{abstract}\\
   + equals(ob: Object): boolean \textit{abstract}\\
@@ -321,7 +249,7 @@ Definir una clase denominada \texttt{Suma}, la cual tiene varios métodos \textt
   + dividir(numero: Numérica): Numérica \textit{abstract}
 }
 
-\umlclass{Fraccion}{(0,0)}{5.5cm}{umlHeader2}{Fracción}{%
+\umlclass{Fraccion}{(0,0)}{6.5cm}{umlHeader2}{Fracción}{%
   - numerador: int\\
   - denominador: int
 }{%
@@ -337,19 +265,32 @@ Definir una clase denominada \texttt{Suma}, la cual tiene varios métodos \textt
   - simplificar(f: Fracción): Fracción\\
   - mcd(a: int, b: int): int
 }
-
 \draw[inheritance] (Fraccion.north) -- (Numerica.south);
+\end{scope}
+\node[above=0.2cm of scope47, font=\bfseries] {Ejercicio 4.7};
+
 \end{tikzpicture}
+}
 \end{center}
 
-\subsection{Código Fuente}
-\textbf{Clase Numérica:}
-\lstinputlisting[language=Java]{Ejercicio_4_7/Numerica.java}
+\vspace{1cm}
 
-\textbf{Clase Fracción:}
-\lstinputlisting[language=Java]{Ejercicio_4_7/Fraccion.java}
+\subsection{Casos de uso y Resultados (Pruebas)}
+\begin{itemize}
+    \item \textbf{Ejercicio 2.10 y 2.11:} La ejecución retorna los valores instanciados y sumados correspondientes a las cajas, empleados y operaciones, asegurando la sobrecarga exitosa sin errores de compilación.
+    \item \textbf{Ejercicio 4.4 y 4.6:} El casting se ejecutó con éxito. La salida del sistema, demostrando polimorfismo dinámico, fue \textit{``Es un profesor.''} y seguido \textit{``Es un profesor titular.''}
+    \item \textbf{Ejercicio 4.7:} Los resultados probaron igualdad verdadera cruzando las fracciones `1/2` y `2/4`. Además las sumas, multiplicaciones y divisiones generaron nuevas fracciones con el numerador y denominador correctos y simplificados.
+\end{itemize}
 
-\textbf{Clase Prueba:}
-\lstinputlisting[language=Java]{Ejercicio_4_7/Prueba.java}
+\subsection{Links a los Repositorios}
+Para verificar el funcionamiento y el código fuente respectivo, se debe ejecutar cada archivo \texttt{Java} alojado en el repositorio de GitHub:
+
+\begin{itemize}
+    \item \textbf{Ejercicio 2.10:} \url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_2_10}
+    \item \textbf{Ejercicio 2.11:} \url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_2_11}
+    \item \textbf{Ejercicio 4.4:} \url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_4_4}
+    \item \textbf{Ejercicio 4.6:} \url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_4_6}
+    \item \textbf{Ejercicio 4.7:} \url{https://github.com/mateolikescats/POO/tree/main/Actividad_6/Ejercicio_4_7}
+\end{itemize}
 
 \end{document}
