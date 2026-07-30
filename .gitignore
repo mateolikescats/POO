@@ -1,2 +1,9 @@
 # Ignored compiled files
 *.class
+
+# Ignore root PDF files (assignments/books)
+/*.pdf
+
+# Ignore LaTeX auxiliary files
+*.aux
+*.log
